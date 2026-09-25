@@ -43,6 +43,8 @@ def query(address):
         s.sendto(pkt, (ip, port))
         data, addr = s.recvfrom(4096)
 
+        print(f"Respuesta de: {addr[0]}")
+
         if data[0] != 0x1c:
             print("respuesta invalida (no es unconnected pong)")
             return
@@ -73,19 +75,19 @@ def query(address):
         submotd = limpiar3(get(7, ""))
         gamemode = get(8)
         gamemode_num = get(9)
-        port_v4 = get(10)
-        port_v6 = get(11)
 
         print(f"Edition: {edition}")
         print(f"MOTD: {motd}")
-        print(f"Sub-MOTD: {submotd}")
+        if submotd:
+            print(f"Sub-MOTD: {submotd}")
         print(f"Protocolo: {protocol}")
         print(f"Version: {version}")
         print(f"Jugadores: {num_players}/{max_players}")
-        print(f"Gamemode: {gamemode} ({gamemode_num})")
+        if gamemode != "none" or gamemode_num != "none":
+            print(f"Gamemode: {gamemode} ({gamemode_num})")
         print(f"Server GUID: {server_guid}")
-        print(f"Server ID: {server_id}")
-        print(f"Puerto v4/v6: {port_v4}/{port_v6}")
+        if server_id != "none":
+            print(f"Server ID: {server_id}")
 
     except socket.timeout:
         print(f"{ip}:{port} --> timeout")
