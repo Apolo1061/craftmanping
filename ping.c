@@ -133,12 +133,13 @@ void query(char *address) {
     const char *edition   = num_campos > 0 ? campos[0] : "none";
     char *motd            = num_campos > 1 ? campos[1] : "none";
     const char *protocol  = num_campos > 2 ? campos[2] : "none";
-    const char *nplayers  = num_campos > 3 ? campos[3] : "0";
-    const char *mplayers  = num_campos > 4 ? campos[4] : "0";
-    const char *server_id = num_campos > 5 ? campos[5] : "none";
-    char *submotd         = num_campos > 6 ? campos[6] : "";
-    const char *gamemode  = num_campos > 7 ? campos[7] : "none";
-    const char *gm_num    = num_campos > 8 ? campos[8] : "none";
+    const char *version   = num_campos > 3 ? campos[3] : "none";
+    const char *nplayers  = num_campos > 4 ? campos[4] : "0";
+    const char *mplayers  = num_campos > 5 ? campos[5] : "0";
+    const char *server_id = num_campos > 6 ? campos[6] : "none";
+    char *submotd         = num_campos > 7 ? campos[7] : "";
+    const char *gamemode  = num_campos > 8 ? campos[8] : "none";
+    const char *gm_num    = num_campos > 9 ? campos[9] : "none";
 
     limpiar3(motd);
     if(strlen(submotd)) limpiar3(submotd);
@@ -148,6 +149,7 @@ void query(char *address) {
     if(strlen(submotd))
         printf("Sub-MOTD: %s\n", submotd);
     printf("Protocolo: %s\n", protocol);
+    printf("Version: %s\n", version);
     printf("Jugadores: %s/%s\n", nplayers, mplayers);
     if(strcmp(gamemode, "none") != 0 || strcmp(gm_num, "none") != 0)
         printf("Gamemode: %s (%s)\n", gamemode, gm_num);
